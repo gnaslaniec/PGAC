@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_file, redirect, url_for
+from flask import Flask, flash, render_template, request, send_file, redirect, url_for
 from flask_qrcode import QRcode
 from serial import Serial
 import time
@@ -9,6 +9,7 @@ time.sleep(2)
 print(ser.name)
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'Jp8fSDuJBD9dklluvxk2cQ'    
 qrcode = QRcode(app)
 
 @app.route("/", methods = ['POST','GET'])

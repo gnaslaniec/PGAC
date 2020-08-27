@@ -1,14 +1,14 @@
 <!DOCTYPE html>
+
 <html>
 <head>
     <title>PGAC</title>
 </head>
-
-<body>
+{% block body %}
     <center><h1>Para pagar a passagem:</h1></center>
     <center><h2>QRCode: Escaneie o QRCode</h2></center> 
     <center><h2>NFC: Encoste seu celular no leitor</h2></center>
     <center><img src="{{ qrcode('ap00wWyzsMDxKACdzfqQnw') }}"></center>
     <center><h3>Passagem: R$4,50</h3></center>
-</body>
+{% endblock %}
 </html>
