@@ -1,12 +1,12 @@
 from flask import Flask, flash, render_template, request, send_file, redirect, url_for
 from flask_qrcode import QRcode
-from serial import Serial
+# from serial import Serial
 import time
 import atexit
 
-ser = Serial('COM3', 9600)
+# ser = Serial('COM3', 9600)
 time.sleep(2)
-print(ser.name)
+# print(ser.name)
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Jp8fSDuJBD9dklluvxk2cQ'    
@@ -26,10 +26,10 @@ def turn_on():
     nome = req_data['nome']
     saldo = req_data['saldo']
     if saldo >= 4.50:
-        ser.write(b'H')
+        # ser.write(b'H')
         print("Saldo suficiente!")
     else:
-        ser.write(b'L')
+        # ser.write(b'L')
         print("Saldo insuficiente!")
     return redirect(url_for('index'))
 
