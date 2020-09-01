@@ -1,33 +1,44 @@
-from flask import Flask, flash, render_template, request, send_file, redirect, url_for
+from flask import Flask, flash, render_template, request, redirect, url_for
 from flask_qrcode import QRcode
+from flask_mysqldb import MySQL
+import mysql.connector
 from serial import Serial
+from operacoes import Operacoes
 import time
-import atexit
 
+# Comunicação serial com o Arduino/Catraca
 ser = Serial('COM3', 9600)
 time.sleep(2)
-print(ser.name)
-
+# Configurações do Flask
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'Jp8fSDuJBD9dklluvxk2cQ'    
+app.config['SECRET_KEY'] = 'Jp8fSDuJBD9dklluvxk2cQ'
 qrcode = QRcode(app)
+MySQL(app)
+#Conexão com o Banco de dados
+db = mysql.connector.connect(
+   host="localhost",
+   user="root",
+   passwd="root",
+   database='pgac',
+   auth_plugin='mysql_native_password'
+)
+cursor = db.cursor(buffered=True)
 
+# Define a página inicial da aplicação
 @app.route("/", methods = ['POST','GET'])
 def index():
     return render_template("index.html")
-
+# API para autenticação e comunicação com a catraca
 @app.route('/autenticacao', methods=['POST'] )
 def turn_on():
     req_data = request.get_json()
-
-    print(req_data)
-
     id_usuario = req_data['id_usuario']
     nome = req_data['nome']
-    saldo = req_data['saldo']
+    saldo = Operacoes.retorna_saldo_usuario(cursor,id_usuario)
     if saldo >= 4.50:
         ser.write(b'H')
         print("Saldo suficiente!")
+        Operacoes.atualiza_saldo(db,cursor,saldo,id_usuario)
     else:
         ser.write(b'L')
         print("Saldo insuficiente!")
