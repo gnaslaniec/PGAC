@@ -1,26 +1,15 @@
 from flask import Flask, flash, render_template, request, redirect, url_for
 from flask_qrcode import QRcode
-<<<<<<< HEAD
 from flask_mysqldb import MySQL
 import mysql.connector
 from serial import Serial
 from operacoes import Operacoes
-=======
-# from serial import Serial
->>>>>>> 45cdc3f3e6bcc5e17c91955dfb128d0c386780db
 import time
 
-<<<<<<< HEAD
 # Comunicação serial com o Arduino/Catraca
 ser = Serial('COM3', 9600)
 time.sleep(2)
 # Configurações do Flask
-=======
-# ser = Serial('COM3', 9600)
-time.sleep(2)
-# print(ser.name)
-
->>>>>>> 45cdc3f3e6bcc5e17c91955dfb128d0c386780db
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Jp8fSDuJBD9dklluvxk2cQ'
 qrcode = QRcode(app)
