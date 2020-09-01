@@ -31,8 +31,10 @@
             .qrcode{
                 border: 2px solid #ffffff;
                 padding: 16px;
+                height: 350px;
             }
             .content_qrcode{
+                justify-content: center;
                 display: flex;
                 align-items: center;
             }
@@ -71,7 +73,7 @@
             <div style="width: 100%;">
                 <div class="content_qrcode">
                     <p class="col-md-3"><strong>QRCODE</strong></br>Escaneie o QRCode</p>
-                    <img class="qrcode col-md-6 " src="{{ qrcode('ap00wWyzsMDxKACdzfqQnw') }}">
+                    <img class="qrcode" src="{{ qrcode('ap00wWyzsMDxKACdzfqQnw') }}">
                     <p class="col-md-3" ><strong>NFC</strong> </br>Encoste seu celular no leitor</p>
                 </div> 
             </div>
