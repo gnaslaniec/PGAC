@@ -10,7 +10,8 @@ import yaml
 conf = yaml.load(open('conf/application.yml'))
 
 # Comunicação serial com o Arduino/Catraca
-ser = Serial('COM3', 9600)
+#ser = Serial('COM3', 9600)
+ser = Serial('/dev/ttyACM0', 9600)
 time.sleep(2)
 
 # Configurações do Flask
@@ -32,7 +33,7 @@ def index():
 def autenticacao():
     req_data = request.get_json()
     id_usuario = req_data['id_usuario']
-    nome = req_data['nome']
+    #nome = req_data['nome']
     saldo = Operacoes.retorna_saldo_usuario(cursor,id_usuario)
     print(saldo)
     if saldo >= 450:
@@ -44,6 +45,6 @@ def autenticacao():
         ser.write(b'L')
         print("Saldo insuficiente!")
         return '0'
-    
+
 if __name__ == "__main__":
     app.run(debug=True, port=3000, use_reloader=False)
