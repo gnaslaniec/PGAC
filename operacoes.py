@@ -1,18 +1,29 @@
 import psycopg2
+import yaml
 
 class Operacoes(object):
 
-    def conexao_bd():
+    # Conexão localhost
+    def conexao_bd_local():
         con = psycopg2.connect(
             database="pgac",
             user="postgres",
             password="root",
             host="localhost",
             port="5432"
-        )
-
+        ) 
         cur = con.cursor()
-
+        return con, cur
+        
+    def conexao_bd_rds(conf):
+        con = psycopg2.connect(
+            database=conf['db_rds']['database'],
+            user=conf['db_rds']['user'],
+            password=conf['db_rds']['password'],
+            host=conf['db_rds']['host'],
+            port=conf['db_rds']['port']
+        )
+        cur = con.cursor()
         return con, cur
 
     def retorna_saldo_usuario(cursor, id_usuario):

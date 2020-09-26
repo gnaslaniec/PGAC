@@ -4,6 +4,10 @@ import psycopg2
 from serial import Serial
 from operacoes import Operacoes
 import time
+import yaml
+
+# Arquivo com as configurações da aplicação
+conf = yaml.load(open('conf/application.yml'))
 
 # Comunicação serial com o Arduino/Catraca
 ser = Serial('COM3', 9600)
@@ -11,11 +15,12 @@ time.sleep(2)
 
 # Configurações do Flask
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'Jp8fSDuJBD9dklluvxk2cQ'
+app.config['SECRET_KEY'] = conf['app']['api_secret_key'],
 qrcode = QRcode(app)
 
 #Conexão com o Banco de dados
-connection, cursor = Operacoes.conexao_bd()
+#connection, cursor = Operacoes.conexao_bd_local()
+connection, cursor = Operacoes.conexao_bd_rds(conf)
 
 # Define a página inicial da aplicação
 @app.route("/", methods = ['POST','GET'])
@@ -29,6 +34,7 @@ def autenticacao():
     id_usuario = req_data['id_usuario']
     nome = req_data['nome']
     saldo = Operacoes.retorna_saldo_usuario(cursor,id_usuario)
+    print(saldo)
     if saldo >= 450:
         ser.write(b'H')
         print("Saldo suficiente!")

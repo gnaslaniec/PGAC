@@ -1,0 +1,9 @@
+db_rds:
+    database: pgac_rds
+    user: pgac
+    password: Mochileiros2020
+    host: pgac.cnolijchjnvc.sa-east-1.rds.amazonaws.com
+    port: 5432
+
+app:
+    api_secret_key: Jp8fSDuJBD9dklluvxk2cQ
