@@ -9,7 +9,7 @@ import os
 
 # Arquivo com as configurações da aplicação
 conf = yaml.load(open('conf/application.yml'))
-
+print("Chegou aqui!")
 # Comunicação serial com o Arduino/Catraca
 try:
     ser = Serial('COM3', 9600)
