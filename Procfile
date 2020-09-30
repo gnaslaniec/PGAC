@@ -1,1 +1,1 @@
-web: python pgac.py
+web: python pgac.py runserver 0.0.0.0:5000
