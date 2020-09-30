@@ -1,1 +1,1 @@
-web: gunicorn app:pgac
+web: python pgac.py

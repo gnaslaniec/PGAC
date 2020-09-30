@@ -1,17 +1,23 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_qrcode import QRcode
 import psycopg2
-from serial import Serial
+from serial import Serial, SerialException
 from operacoes import Operacoes
 import time
 import yaml
+import os
 
 # Arquivo com as configurações da aplicação
 conf = yaml.load(open('conf/application.yml'))
 
 # Comunicação serial com o Arduino/Catraca
-ser = Serial('COM3', 9600)
-#ser = Serial('/dev/ttyACM0', 9600)
+try:
+    ser = Serial('COM3', 9600)
+except SerialException:
+    try:
+        ser = Serial('/dev/ttyACM0', 9600)
+    except SerialException:
+        ser = 0
 time.sleep(2)
 
 # Configurações do Flask
@@ -36,14 +42,17 @@ def autenticacao():
     saldo = Operacoes.retorna_saldo_usuario(cursor,id_usuario)
     print(saldo)
     if saldo >= 450:
-        ser.write(b'H')
+        if ser != 0:
+            ser.write(b'H')
         print("Saldo suficiente!")
         Operacoes.atualiza_saldo(connection,cursor,saldo,id_usuario)
         return '1'
     else:
-        ser.write(b'L')
+        if ser != 0:
+            ser.write(b'L')
         print("Saldo insuficiente!")
         return '0'
 
 if __name__ == "__main__":
-    app.run(debug=True, port=3000, use_reloader=False)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', debug=True, port=port, use_reloader=False)
