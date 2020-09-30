@@ -10,8 +10,8 @@ import yaml
 conf = yaml.load(open('conf/application.yml'))
 
 # Comunicação serial com o Arduino/Catraca
-#ser = Serial('COM3', 9600)
-ser = Serial('/dev/ttyACM0', 9600)
+ser = Serial('COM3', 9600)
+#ser = Serial('/dev/ttyACM0', 9600)
 time.sleep(2)
 
 # Configurações do Flask
@@ -26,14 +26,13 @@ connection, cursor = Operacoes.conexao_bd_rds(conf)
 # Define a página inicial da aplicação
 @app.route("/", methods = ['POST','GET'])
 def index():
-    return render_template("index.html")
+    return render_template("index.html", qrcode_key=conf['qrcode']['qrcode_key'])
 
 # API para autenticação e comunicação com a catraca
 @app.route('/autenticacao', methods=['POST'] )
 def autenticacao():
     req_data = request.get_json()
     id_usuario = req_data['id_usuario']
-    #nome = req_data['nome']
     saldo = Operacoes.retorna_saldo_usuario(cursor,id_usuario)
     print(saldo)
     if saldo >= 450:

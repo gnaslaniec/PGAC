@@ -7,3 +7,6 @@ db_rds:
 
 app:
     api_secret_key: Jp8fSDuJBD9dklluvxk2cQ
+
+qrcode:
+    qrcode_key: ap00wWyzsMDxKACdzfqQnw
