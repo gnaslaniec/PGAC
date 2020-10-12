@@ -27,11 +27,13 @@ class Operacoes(object):
         return con, cur
 
     def retorna_saldo_usuario(cursor, id_usuario):
-        cursor.execute("""select saldo from usuario where id = %s""", (id_usuario,))
+        cursor.execute("""select saldo_centavos from usuario where id = %s""", (id_usuario,))
         saldo = cursor.fetchone()
         return saldo[0]
 
     def atualiza_saldo(db,cursor,saldo,id_usuario):
-        saldo_atualizado = saldo - 450
-        cursor.execute("""update usuario set saldo = %s where id = %s""", (saldo_atualizado,id_usuario))
+        saldo_atualizado_centavos = saldo - 450
+        saldo_atualizado_reais = float(saldo_atualizado_centavos) / 100
+        cursor.execute("""update usuario set saldo_centavos = %s where id = %s""", (saldo_atualizado_centavos,id_usuario))
+        cursor.execute("""update usuario set saldo = %s where id = %s""", (saldo_atualizado_reais,id_usuario))
         db.commit()
