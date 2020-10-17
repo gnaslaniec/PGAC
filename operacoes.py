@@ -21,7 +21,11 @@ class Operacoes(object):
             user=conf['db_rds']['user'],
             password=conf['db_rds']['password'],
             host=conf['db_rds']['host'],
-            port=conf['db_rds']['port']
+            port=conf['db_rds']['port'],
+            keepalives=1,
+            keepalives_idle=30,
+            keepalives_interval=10,
+            keepalives_count=5
         )
         cur = con.cursor()
         return con, cur
