@@ -35,6 +35,11 @@ class Operacoes(object):
         saldo = cursor.fetchone()
         return saldo[0]
 
+    def retorna_saldo_usuario_reais(cursor, id_usuario):
+        cursor.execute("""select round(saldo,2) from usuario where id = %s""", (id_usuario,))
+        saldo = cursor.fetchone()
+        return saldo[0]
+
     def atualiza_saldo(db,cursor,saldo,id_usuario):
         saldo_atualizado_centavos = saldo - 450
         saldo_atualizado_reais = float(saldo_atualizado_centavos) / 100
