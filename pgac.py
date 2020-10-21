@@ -22,7 +22,7 @@ time.sleep(2)
 
 # Configurações do Flask
 app = Flask(__name__)
-app.config['SECRET_KEY'] = conf['app']['api_secret_key'],
+app.config['SECRET_KEY'] = conf['app']['api_secret_key']
 qrcode = QRcode(app)
 
 #Conexão com o Banco de dados
