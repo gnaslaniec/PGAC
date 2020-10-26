@@ -5,16 +5,32 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>PGAC</title>
         <!-- CSS only -->
-        <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <!-- Font  -->
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
         <style>
+
+                
+            /* * {
+                padding:0;
+                margin:0;
+                vertical-align:baseline;
+                list-style:none;
+                border:0;
+                background-color: rgb(33, 12, 243);
+            }
+            :root{
+                background-color: rgb(33, 12, 243) !important;
+            } */
+            /* [data-darkreader-inline-bgcolor] {
+                background-color: rgb(33, 12, 243) !important;
+            } */
             body{
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                background-color: #2e1aee !important;
+                background-color: rgb(33, 12, 243)   !important;
                 color: #ffffff;
                 height: 100vh;
                 font-family: 'Montserrat', sans-serif;
@@ -29,12 +45,12 @@
                 text-align: center;
             }
             .content_text h2 {
-                margin-bottom: 32px;
+                margin-bottom: 40px;
             }
             .qrcode{
                 border: 2px solid #ffffff;
                 padding: 16px;
-                height: 250px;
+                height: 400px;
             }
             .content_qrcode{
                 justify-content: center;
@@ -44,7 +60,7 @@
             .content_qrcode p {
                 padding: 0 24px;
                 text-align: center;
-                font-size: 18px;
+                font-size: 24px;
                 font-weight: 500;
             }
             .content_qrcode strong{
@@ -62,11 +78,11 @@
             }
         </style>
     </head>
-    <body class="container">
+    <body >
         {% block body %}
 
         <header>
-            <img src="https://brunofortunato.com.br/image/logo-app.png" width="180px" height="123px" alt="Logo Pagbus">
+            <img src="https://brunofortunato.com.br/image/logo-app.png" width="280px"  alt="Logo Pagbus">
         </header>
 
             <div class="content_text">
