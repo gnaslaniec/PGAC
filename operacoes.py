@@ -1,5 +1,6 @@
 import psycopg2
 import yaml
+from datetime import datetime
 
 class Operacoes(object):
 
@@ -40,4 +41,8 @@ class Operacoes(object):
         saldo_atualizado_reais = float(saldo_atualizado_centavos) / 100
         cursor.execute("""update usuario set saldo_centavos = %s where id = %s""", (saldo_atualizado_centavos,id_usuario))
         cursor.execute("""update usuario set saldo = %s where id = %s""", (saldo_atualizado_reais,id_usuario))
+        db.commit()
+
+    def registra_acesso(db,cursor,id_usuario,sucesso):
+        cursor.execute("insert into historico(id_usuario, data_pagamento, sucesso) values (%s,%s,%s)", (id_usuario,datetime.now(),sucesso))
         db.commit()
