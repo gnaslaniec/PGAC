@@ -45,13 +45,13 @@ def autenticacao():
             ser.write(b'H')
         print("Saldo suficiente!")
         Operacoes.atualiza_saldo(connection,cursor,saldo,id_usuario)
-        Operacoes.registra_acesso(connection,cursor,id_usuario,True)
+        #Operacoes.registra_acesso(connection,cursor,id_usuario,True)
         return jsonify(status='1')
     else:
         if ser != 0:
             ser.write(b'L')
         print("Saldo insuficiente!")
-        Operacoes.registra_acesso(connection,cursor,id_usuario,False)
+        #Operacoes.registra_acesso(connection,cursor,id_usuario,False)
         return jsonify(status='0')
 
 if __name__ == "__main__":
